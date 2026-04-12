@@ -1,5 +1,6 @@
 #pragma once
 #include "portaudio.h"
+#include <alsa/asoundlib.h>
 #include <iostream>
 
 namespace DesktopAM {
