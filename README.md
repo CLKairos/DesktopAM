@@ -42,10 +42,17 @@ DesktopAM/
 ---
 
 ## Building
+### Windows
+- Open the Visual Studio project
+- Ensure all the libraries are linked correctly
+- Enable proper post-build commands (copying dlls and resource files)
+- Build
 
-Open `DesktopAM.slnx` in Visual Studio. Make sure SFML and PortAudio are linked in the project properties before building.
-
-Supported platforms: x64, x86
+### Linux
+- Clone repo
+- Ensure all the libraries are installed and in a dir called "lib" in the project root directory
+- Build
+- Copy required so and resource files
 
 ---
 
