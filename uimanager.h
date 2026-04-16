@@ -5,6 +5,7 @@
 #include <optional>
 #include <vector>
 #include <string>
+#include <algorithm>
 
 namespace DesktopAM {
 	class UIManager
@@ -12,8 +13,10 @@ namespace DesktopAM {
 	public:
 		UIManager();
 		void run();
+		static float getVolume(const std::string& name);
 
 	private:
+		static std::unordered_map<std::string, float> channelVolumes;
 		sf::RenderWindow window;
 		sf::Font titleFont;
 		sf::Font bodyFont;

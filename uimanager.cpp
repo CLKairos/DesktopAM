@@ -84,6 +84,7 @@ void DesktopAM::UIManager::initChannels() {
 
         channels.push_back(std::move(c));
     }
+
 }
 
 // ---- Init toggles ----
@@ -198,6 +199,11 @@ void DesktopAM::UIManager::handleMousePress(sf::Vector2f pos) {
                 float trackRight = trackLeft + c.track.getSize().x;
                 float t = (pos.x - trackLeft) / (trackRight - trackLeft);
                 c.volume = std::max(0.f, std::min(1.f, t));
+                channelVolumes[c.name] = c.volume;
+                std::string lower = c.name;
+                std::transform(lower.begin(), lower.end(), lower.begin(), ::tolower);
+                UIManager::channelVolumes[c.name] = c.volume;
+                AudioMixer::setVolume(lower, c.volume);
                 return;
             }
         }
@@ -438,4 +444,12 @@ void DesktopAM::UIManager::renderSettings() {
         window.draw(t.track);
         window.draw(t.thumb);
     }
+}
+
+std::unordered_map<std::string, float> DesktopAM::UIManager::channelVolumes;
+
+float DesktopAM::UIManager::getVolume(const std::string& name) {
+    auto it = channelVolumes.find(name);
+    if (it != channelVolumes.end()) return it->second;
+    return 1.0f;
 }
